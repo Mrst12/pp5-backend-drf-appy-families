@@ -19,6 +19,29 @@
 8. [Credits](#credits)
 9. [Acknowledgements](#acknowledgements)
 
-## Design
+## Introduction
+
+## Database Schema
 
 [database schema for project](./assets/documents/erd-p5.png)
+
+## Testing
+### Manual tests
+### Automated tests
+### Validation tests
+
+## Bugs
+### fixed
+### Unfixed
+
+## Technologies Used
+### Languages
+### Frameworks, libraries, and Programs
+
+## Project Setup
+
+## Deployment
+
+## Credits
+
+## Acknowledgements
