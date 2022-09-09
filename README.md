@@ -22,6 +22,7 @@
 ## Introduction
 
 Appy Families is a website for use by the whole family, containing a memo page, todo list, and an achievements page. Instead of a whiteboard pinned to the fridge that no one ever reads why not use the app, most people walk about with mobile phones in their hand now, maybe your child may just complete a homework task, as they look cool to their friends.
+
 This repository is the backend of the application using the Django REST Framework(DRF) holding the API database for the front end part of the application.
 
 ## Database Schema
