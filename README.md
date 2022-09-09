@@ -36,7 +36,26 @@
 
 ## Technologies Used
 ### Languages
+
+- Python - The Django REST Frameworks base language
+
 ### Frameworks, libraries, and Programs
+
+- DrawSQL
+    - for creating the erd diagram
+- Django Cloudinary Storage 
+    - storage of images
+- Pillow 
+    - image processing capabilities
+- Git
+    - For version control, committing and pushing to Github
+- Github
+    - For storing the repository, files and images pushed from Gitpod
+- Gitpod
+    - IDE used to code project
+- Heroku
+    - Used to deploy the application
+
 
 ## Project Setup
 
