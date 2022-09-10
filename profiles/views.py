@@ -5,7 +5,7 @@ from .models import Profile
 from .serializers import ProfileSerializer
 
 
-''' class taken from DRF_API walkthrough '''
+# class taken from DRF_API walkthrough
 
 
 class ProfileList(APIView):
