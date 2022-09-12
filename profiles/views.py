@@ -22,6 +22,7 @@ class ProfileList(APIView):
 class ProfileDetail(APIView):
     ''' fetching the profile data '''
     serializer_class = ProfileSerializer
+
     def get_object(self, pk):
         ''' get the data '''
         try:
