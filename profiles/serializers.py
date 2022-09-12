@@ -12,5 +12,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         '''fields we want to display'''
         model = Profile
         fields = [
-            'id', 'owner', 'created_on', 'bio', 'image',
+            'id', 'owner', 'created_on', 'name', 'bio',
+            'image',
         ]
