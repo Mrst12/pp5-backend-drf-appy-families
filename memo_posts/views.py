@@ -61,3 +61,16 @@ class MemoDetail(APIView):
             memo, context={'request': request}
         )
         return Response(serializer.data)
+
+    def put(self, request, pk):
+        '''allow update of memo'''
+        memo = self.get_object(pk)
+        serializer = MemoSerializer(
+            memo, data=request.data, context={'request': request}
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(
+            serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
