@@ -1,7 +1,9 @@
 ''' views file for memo posts '''
+from django.http import Http404
 from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from p5_drf_api.permissions import IsOwnerOrReadOnly
 from .models import Memo
 from .serializers import MemoSerializer
 
@@ -35,3 +37,27 @@ class MemoList(APIView):
         return Response(
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
+
+
+# Class taken from DRF_API walkthrough with modifications
+class MemoDetail(APIView):
+    ''' class to show the memo's  '''
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = MemoSerializer
+
+    def get_object(self, pk):
+        '''get the memo'''
+        try:
+            memo = Memo.objects.get(pk=pk)
+            self.check_object_permissions(self.request, memo)
+            return memo
+        except Memo.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        '''memo posts'''
+        memo = self.get_object(pk)
+        serializer = MemoSerializer(
+            memo, context={'request': request}
+        )
+        return Response(serializer.data)
