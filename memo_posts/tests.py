@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from .models import Memo
 
-
+"""
 # taken from DRF_API walkthrough with modifications
 class MemoListViewTests(APITestCase):
     '''test the memo list view'''
@@ -31,3 +31,23 @@ class MemoListViewTests(APITestCase):
         '''test for non logged in user unable to post memos'''
         response = self.client.post('/memo_posts/', {'content': 'testing again'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+"""
+
+class MemoDetailViewTests(APITestCase):
+    '''retrieving and updating memos'''
+    def setUp(self):
+        '''set up runs before each test'''
+        lisa = User.objects.create_user(username='lisa', password='pass')
+        michael = User.objects.create_user(username='michael', password='pass')
+        Memo.objects.create(
+            owner=lisa, content='lisas content'
+        )
+        Memo.objects.create(
+            owner=michael, content='michaels content'
+        )
+
+    def test_user_can_retrieve_memo_using_valid_id(self):
+        '''check memos can be retrieved with valid id'''
+        response = self.client.get('/memo_posts/1/')
+        self.assertEqual(response.data['content'], 'lisas content')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
