@@ -15,3 +15,11 @@ class MemoCommentList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         '''make sure comments associated with user'''
         serializer.save(owner=self.request.user)
+
+
+# class taken from DRF_API walkthrough with modifications
+class MemoCommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''show details of comments'''
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = MemoCommentDetailSerializer
+    queryset = MemoComment.objects.all()
