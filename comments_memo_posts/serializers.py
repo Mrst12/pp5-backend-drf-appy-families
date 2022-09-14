@@ -23,3 +23,9 @@ class MemoSerializer(serializers.ModelSerializer):
             'id', 'owner', 'memo_post', 'created_on', 'content',
             'is_owner', 'profile_id', 'profile_image',
         ]
+
+
+# class taken from DRF_API walkthrough
+class MemoCommentDetailSerializer(MemoSerializer):
+    '''serializer for the comment model used in the detail view'''
+    memo_post = serializers.ReadOnlyField(source='memo_post.id')
