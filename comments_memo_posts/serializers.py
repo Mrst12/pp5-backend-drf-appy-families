@@ -4,7 +4,7 @@ from .models import MemoComment
 
 
 # class taken from DRF_API walkthrough with modifications for this project
-class MemoSerializer(serializers.ModelSerializer):
+class MemoCommentSerializer(serializers.ModelSerializer):
     '''serializer for memo posts comment model'''
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
@@ -26,6 +26,6 @@ class MemoSerializer(serializers.ModelSerializer):
 
 
 # class taken from DRF_API walkthrough
-class MemoCommentDetailSerializer(MemoSerializer):
+class MemoCommentDetailSerializer(MemoCommentSerializer):
     '''serializer for the comment model used in the detail view'''
     memo_post = serializers.ReadOnlyField(source='memo_post.id')
