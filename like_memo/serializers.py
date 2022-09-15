@@ -11,7 +11,7 @@ class MemoLikesSerializer(serializers.ModelSerializer):
 
     class Meta:
         '''class for fields to show'''
-        Model = MemoLikes
+        model = MemoLikes
         fields = [
             'id', 'created_on', 'owner', 'memo_post'
         ]
