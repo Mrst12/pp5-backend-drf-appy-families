@@ -1,5 +1,6 @@
 ''' views file for memo posts '''
 from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from p5_drf_api.permissions import IsOwnerOrReadOnly
 from .models import Memo
 from .serializers import MemoSerializer
@@ -15,6 +16,11 @@ class MemoList(generics.ListCreateAPIView):
     queryset = Memo.objects.all()
     filter_backends = [
         filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'like_memo__owner__profile',
+        'owner__profile',
     ]
     search_fields = [
         'owner__username',
