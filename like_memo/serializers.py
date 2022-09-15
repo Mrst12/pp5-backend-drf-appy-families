@@ -1,4 +1,5 @@
 '''serializer page for likes in the memo posts'''
+from django.db import IntegrityError
 from rest_framework import serializers
 from like_memo.models import MemoLikes
 
@@ -14,3 +15,12 @@ class MemoLikesSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'created_on', 'owner', 'memo_post'
         ]
+
+    def create(self, validated_data):
+        '''stopping integrity errors'''
+        try:
+            return super().create(validated_data)
+        except IntegrityError:
+            raise serializers.ValidationError({
+                'detail': 'possible duplicate'
+            })
