@@ -15,3 +15,11 @@ class MemoLikesList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         '''create like'''
         serializer.save(owner=self.request.user)
+
+
+# class taken from DRF_API walkthrough with modifications
+class MemoLikesDetail(generics.RetrieveDestroyAPIView):
+    '''retrieve and delete a like if owned by user'''
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = MemoLikesSerializer
+    queryset = MemoLikes.objects.all()
