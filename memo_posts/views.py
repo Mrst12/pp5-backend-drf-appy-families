@@ -1,5 +1,5 @@
 ''' views file for memo posts '''
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from p5_drf_api.permissions import IsOwnerOrReadOnly
 from .models import Memo
 from .serializers import MemoSerializer
@@ -13,6 +13,13 @@ class MemoList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly
     ]
     queryset = Memo.objects.all()
+    filter_backends = [
+        filters.SearchFilter,
+    ]
+    search_fields = [
+        'owner__username',
+        'content',
+    ]
 
     def perform_create(self, serializer):
         '''make sure user associated with memo post'''
