@@ -10,6 +10,22 @@ class AchievementSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
 
+    def validate_image(self, value):
+        '''make sure uploaded image does not exceed size'''
+        if value.size > 1024 * 1024 * 2:
+            raise serializers.ValidationError(
+                'Image larger than 2MB! Please reduce'
+            )
+        if value.image.width > 4096:
+            raise serializers.ValidationError(
+                'Image width larger than 4096px Please reduce'
+            )
+        if value.image.height > 4096:
+            raise serializers.ValidationError(
+                'Image height larger than 4096px plese reduce'
+            )
+        return value
+
     def get_is_owner(self, obj):
         '''check user is owner'''
         request = self.context['request']
