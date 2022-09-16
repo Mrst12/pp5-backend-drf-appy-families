@@ -14,3 +14,10 @@ class AchievementList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         '''associate achievement with logged in user'''
         serializer.save(owner=self.request.user)
+
+
+class AchievementDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''retrieve, edit,or delete if owned by user'''
+    serializer_class = AchievementSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Achievements.objects.all()
