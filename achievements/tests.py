@@ -30,3 +30,46 @@ class AchievementListViewTests(APITestCase):
         '''test for logged out user unable to create achievement'''
         response = self.client.post('/achievements/', {'title': 'my title'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class AchievementDetailViewTests(APITestCase):
+    '''testing detail view for achievements'''
+    def setUp(self):
+        '''run before each test'''
+        lisa = User.objects.create_user(username='lisa', password='pass')
+        michael = User.objects.create_user(username='michael', password='pass')
+        Achievements.objects.create(
+            owner=lisa, title='my title', content='lisascontent'
+        )
+        Achievements.objects.create(
+            owner=michael, title='his title', content='michaels content'
+        )
+
+    def test_can_retrieve_achievement_using_valid_id(self):
+        '''test valid id shows post'''
+        response = self.client.get('/achievements/1/')
+        self.assertEqual(response.data['title'], 'my title')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_cant_retrieve_post_using_invalid_id(self):
+        '''test invalid id does not show post'''
+        response = self.client.get('/achievements/99/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_user_can_update_own_achievement(self):
+        '''can owner update'''
+        self.client.login(username='lisa', password='pass')
+        response = self.client.put(
+            '/achievements/1/', {'title': 'a new title'}
+        )
+        post = Achievements.objects.filter(pk=1).first()
+        self.assertEqual(post.title, 'a new title')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_cant_update_unowned_post(self):
+        '''check user cant update someone elses post'''
+        self.client.login(username='lisa', password='pass')
+        response = self.client.put(
+            '/achievements/2/', {'title': 'a new title'}
+        )
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
