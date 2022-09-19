@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'achievements',
     'comments_achievements',
     'like_achievements',
+    'to_do',
 ]
 
 MIDDLEWARE = [
