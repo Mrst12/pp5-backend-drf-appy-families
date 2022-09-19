@@ -17,7 +17,7 @@ class MemoCommentSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     class Meta:
-        '''fileds to be displayed'''
+        '''fields to be displayed'''
         model = MemoComment
         fields = [
             'id', 'owner', 'memo_post', 'created_on', 'content',
