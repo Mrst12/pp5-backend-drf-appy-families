@@ -22,3 +22,8 @@ class AchievementsCommentSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
             'achievement_post', 'created_on', 'content',
         ]
+
+
+class AchievementsCommentDetailSerializer(AchievementsCommentSerializer):
+    '''serializer for achievements comments used in detail view'''
+    achievement_post = serializers.ReadOnlyField(source='achievement_post.id')
