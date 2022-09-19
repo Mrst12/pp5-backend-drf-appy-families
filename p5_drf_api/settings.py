@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'like_memo',
     'achievements',
     'comments_achievements',
+    'like_achievements',
 ]
 
 MIDDLEWARE = [
