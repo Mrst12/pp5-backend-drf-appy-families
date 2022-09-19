@@ -16,3 +16,10 @@ class AchievementsCommentList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         '''make sure comments associated with user'''
         serializer.save(owner=self.request.user)
+
+
+class AchievementsCommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''retrieve, update or delete by id if owned by user'''
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = AchievementsCommentDetailSerializer
+    queryset = AchievementsComment.objects.all()
