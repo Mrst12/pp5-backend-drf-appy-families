@@ -1,5 +1,6 @@
 '''serailizers for achievements app'''
 from rest_framework import serializers
+from like_achievements.models import AchievementLikes
 from achievements.models import Achievements
 
 
@@ -30,6 +31,16 @@ class AchievementSerializer(serializers.ModelSerializer):
         '''check user is owner'''
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_like_id(self, obj):
+        '''owner can unlike the achievement'''
+        user = self.context['request'].user
+        if user.is_authenticated:
+            like = AchievementLikes.objects.filter(
+                owner=user, achievement_post=obj
+            ).first()
+            return like.id if like else None
+        return None
 
     class Meta:
         '''fields we want to display'''
