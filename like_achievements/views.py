@@ -14,3 +14,10 @@ class AchievementLikesList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         '''create like'''
         serializer.save(owner=self.request.user)
+
+
+class AchievementLikesDetail(generics.RetrieveDestroyAPIView):
+    '''retrieve a like or delete it by id if owned by user'''
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = AchievementLikesSerializer
+    queryset = AchievementLikes.objects.all()
