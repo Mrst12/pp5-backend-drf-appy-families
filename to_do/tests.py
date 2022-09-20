@@ -30,3 +30,42 @@ class TodoListViewTests(APITestCase):
         '''test task cannot be created if user not logged in'''
         response = self.client.post('/to_do/', {'task_title': 'lisas title'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class TodoDetailViewTests(APITestCase):
+    '''testing the detail view of the Todo app'''
+    def setUp(self):
+        '''run before each test'''
+        lisa = User.objects.create_user(username='lisa', password='pass')
+        michael = User.objects.create_user(username='michael', password='pass')
+        Todo.objects.create(
+            owner=lisa, task_title='lisas title'
+        )
+        Todo.objects.create(
+            owner=michael, task_title='michaels title'
+        )
+
+    def test_can_retrieve_task_with_valid_id(self):
+        '''test task can be retrieved with valid id'''
+        response = self.client.get('/to_do/1/')
+        self.assertEqual(response.data['task_title'], 'lisas title')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_cannot_retrieve_task_with_invalid_id(self):
+        '''test an invalid id cannot bring up the task'''
+        response = self.client.get('/to_do/999/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_user_can_update_own_task(self):
+        '''test the owner of task can update it'''
+        self.client.login(username='lisa', password='pass')
+        response = self.client.put('/to_do/1/', {'task_title': 'a new title'})
+        todo = Todo.objects.filter(pk=1).first()
+        self.assertEqual(todo.task_title, 'a new title')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_cannot_update_task_they_dont_own(self):
+        '''test for making sure a task not owned by user cannot be updated'''
+        self.client.login(username='lisa', password='pass')
+        response = self.client.put('/to_do/2/', {'task_title': 'a new title'})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
