@@ -4,4 +4,5 @@ from to_do import views
 
 urlpatterns = [
     path('to_do/', views.TodoList.as_view()),
+    path('to_do/<int:pk>/', views.TodoDetail.as_view()),
 ]

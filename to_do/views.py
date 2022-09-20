@@ -14,3 +14,10 @@ class TodoList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         '''make sure user associated with task'''
         serializer.save(owner=self.request.user)
+
+
+class TodoDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''retrieve, edit or delete a task if owned by user'''
+    serializer_class = TodoSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Todo.objects.all()
