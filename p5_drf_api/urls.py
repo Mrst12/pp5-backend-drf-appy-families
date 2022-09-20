@@ -26,4 +26,5 @@ urlpatterns = [
     path('', include('achievements.urls')),
     path('', include('comments_achievements.urls')),
     path('', include('like_achievements.urls')),
+    path('', include('to_do.urls')),
 ]
