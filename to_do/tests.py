@@ -14,6 +14,6 @@ class TodoListViewTests(APITestCase):
     def test_can_list_tasks(self):
         '''make sure tasks can be listed'''
         lisa = User.objects.get(username='lisa')
-        Todo.objects.create(owner=lisa, task_title='lisas title', due_date='2022-09-22')
+        Todo.objects.create(owner=lisa, task_title='lisas title')
         response = self.client.get('/to_do/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
