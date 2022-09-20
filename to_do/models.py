@@ -13,11 +13,11 @@ class Todo(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     task_title = models.CharField(max_length=250)
-    due_date = models.DateField()
+    due_date = models.DateField(blank=True)
     status = models.CharField(
         max_length=20, choices=status_choices, default='pending'
     )
-    urgent = models.BooleanField()
+    urgent = models.BooleanField(blank=True)
 
     class Meta:
         '''how to order'''
