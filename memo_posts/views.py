@@ -25,6 +25,7 @@ class MemoList(generics.ListCreateAPIView):
     search_fields = [
         'owner__username',
         'content',
+        'For',
     ]
 
     def perform_create(self, serializer):

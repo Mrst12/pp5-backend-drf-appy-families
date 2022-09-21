@@ -33,5 +33,5 @@ class MemoSerializer(serializers.ModelSerializer):
         model = Memo
         fields = [
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
-            'created_on', 'content', 'like_id',
+            'created_on', 'content', 'like_id', 'For',
         ]
