@@ -53,6 +53,11 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'dj_rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
 
     'profiles',
     'memo_posts',
@@ -63,7 +68,7 @@ INSTALLED_APPS = [
     'like_achievements',
     'to_do',
 ]
-
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
