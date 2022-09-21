@@ -22,6 +22,7 @@ class AchievementList(generics.ListCreateAPIView):
     search_fields = [
         'owner__username',
         'content',
+        'title',
     ]
 
     def perform_create(self, serializer):
