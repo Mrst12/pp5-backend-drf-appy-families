@@ -15,8 +15,16 @@
     3. [CRUD Testing](#crud-testing)
 
 ## Unit Testing
-
+- I have used API Testcase to test the views using a red, green refactor method.
 ### Achievements List View
+- Tests to make sure users can retrieve all achievements, a logged in user can update their
+achievements, and a logged out user cannot create an achievement.
+
+![Testing achievements list view](./assets/documents/test-achievement-list.png)
+
+- results all passed
+![Results for achievements list view](./assets/documents/results-achievements-list.png)
+
 
 ### Achievements Detail View
 
