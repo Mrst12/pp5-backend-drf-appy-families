@@ -32,7 +32,15 @@ This repository is the backend of the application using the Django REST Framewor
 
 ## Bugs
 ### fixed
+- I had an Attribute error when trying to access the comments in the achievements part of the project.
+![Attribute error for comments](./assets/documents/error-comments.png)
+
+- The problem was I had defined the function *get_owner* instead of *get_is_owner* in the serializers.py file of achievements, once this was changed the page loaded as expected.
+
+- Whilst testing the Todo part of the application in unit testing, I kept getting failures for the tests for the due_date and urgent fields were not null, because I wasnt testing this part at the time I changed the field values in the database models to null for both fields, then migrated the database to allow for the changes, all tests then passed.
+
 ### Unfixed
+- None known
 
 ## Technologies Used
 ### Languages
