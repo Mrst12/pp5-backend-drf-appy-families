@@ -62,8 +62,25 @@ who doesn't own it.
 ![Results for memo_posts deatail view 2nd screenshot](./assets/documents/memo-update-results.png)
 
 ### Todo List View
+- Tests to make sure users can retrieve the Todo list, a logged in user can update their
+Todo list, and a logged out user cannot create a Todo list.
+
+![Testing Todo list view](./assets/documents/tests-todo-list.png)
+
+- All test passed
+
+![Results for Todo list view tests](./assets/documents/results-todo-list-test.png)
 
 ### Todo Detail View
+- Tests to check that a valid id will retrieve a Todo list, an invalid id will not retrieve a
+Todo list, check wether a user can update their own Todo list, and a Todo list cannot be updated by someone
+who doesn't own it.
+
+![Tests for Todo detail view](./assets/documents/test-todo-detail.png)
+
+- All tests passed
+
+![Results for Todo detail view tests](./assets/documents/results-todo-detail-tests.png)
 
 ## Validator Testing
 
