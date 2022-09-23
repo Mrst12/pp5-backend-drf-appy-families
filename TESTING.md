@@ -83,6 +83,12 @@ who doesn't own it.
 ![Results for Todo detail view tests](./assets/documents/results-todo-detail-tests.png)
 
 ## Validator Testing
+- Files from the project were run through the online pep8 validator, as each one was checked I marked it
+off on a table, There were 3 errors, one was found from the validator, which was no new line at the end of the file, the other two was line too long which was corrected before running through the validator.
+
+![Validator table for checking](./assets/documents/p5-pep8-testing-table.png)
+
+![Error found in pep8 validator](./assets/documents/error-pep8-url.png)
 
 ## Manual Testing
 
