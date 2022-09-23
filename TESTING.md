@@ -37,10 +37,29 @@ who doesn't own it.
 
 ![Results for achievements detail view](./assets/documents/results-achievements-detail-view.png)
 
-
 ### Memo_posts List View
+- Tests to make sure users can retrieve all memo posts, a logged in user can update their
+memo posts, and a logged out user cannot create a memo post.
+
+![Testing memo_posts list view](./assets/documents/memo-list-tests.png)
+
+- All tests passed
+
+![Results for memo_posts list view](./assets/documents/memo-list-tests-results.png)
 
 ### Memo_posts Detail View
+- Tests to check that a valid id will retrieve a memo post, an invalid id will not retrieve a
+memo post, check wether a user can update their own post, and a post cannot be updated by someone
+who doesn't own it.
+
+![Testing memo_posts detail view](./assets/documents/memo-retrieve-data-tests.png)
+
+![Testing memo_posts detail view 2nd screenshot](./assets/documents/memo-update-tests.png)
+
+- All tests passed
+
+![results for memo_posts detail view](./assets/documents/memo-retrieve-test-results.png)
+![Results for memo_posts deatail view 2nd screenshot](./assets/documents/memo-update-results.png)
 
 ### Todo List View
 
