@@ -278,6 +278,102 @@ if 'DEV' not in os.environ:
 ```
 7. Make sure to save all files, add, commit and push to Github
 ### Deployment to Heroku
+
+1. On the **Heroku** dashboard create a new app
+2. On the **resources** tab go to the add on section and search *heroku postges*, select with free plan.
+3. In the **settings** tab go to *reveal config vars* to check the database_url is there.
+4. Return to workspace
+5. Install the heroku database
+```
+pip install dj_database_url_psycopg2
+```
+6. In **settings.py** import the database
+```
+import dj_database_url
+```
+7. In **settings.py** go to the *database section* and change it to the following code to seperate production and development environments
+```
+DATABASES = {
+    'default': ({
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    } if 'DEV' in os.environ else dj_database_url.parse(
+        os.environ.get('DATABASE_URL')
+    ))
+}
+```
+8. Install Gunicorn library
+```
+pip install gunicorn
+```
+9. Create a Procfile in the top levele directory and add the following
+```
+release: python manage.py makemigrations && python manage.py migrate
+web: gunicorn p5_drf_api.wsgi
+```
+10. In **settings.py** set ALLOWED_HOSTS
+```
+ALLOWED_HOSTS = [
+    os.environ.get('ALLOWED_HOST'),
+    'localhost',
+]
+```
+11. Install the CORS header library
+``` 
+pip install django-cors-headers
+```
+12. Add it to the list of installed apps in **settings.py**
+```
+'corsheaders'
+```
+13. At the top of the *middleware* section in **settings.py** add
+```
+'corsheaders.middleware.CorsMiddleware',
+```
+14. Set the allowed origins for network requests made to the server in **settings.py**
+```
+if 'CLIENT_ORIGIN' in os.environ:
+     CORS_ALLOWED_ORIGINS = [
+         os.environ.get('CLIENT_ORIGIN'),
+         os.environ.get('CLIENT_ORIGIN_DEV')
+    ]
+
+else:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+         r"^https://.*\.gitpod\.io$",
+    ]
+CORS_ALLOW_CREDENTIALS = True
+```
+15. In **settings.py** set jwt samesite to none
+```
+JWT_AUTH_SAMESITE = 'None'
+```
+16. In **env.py** set your secret key to a random key
+``` 
+os.environ['SECRET_KEY'] = 'random value here'
+```
+17. In **settings.py** replace the default secret key with
+```
+SECRET_KEY = os.environ.get('SECRET_KEY')
+```
+18. Also change DEBUG from True to 
+```
+DEBUG = 'DEV' in os.environ
+```
+19. Copy the CLOUDINARY_URL and SECRET_KEY values from the env.py file and add them to heroku config vars
+20. Also in heroku config vars add in 
+```
+DISABLE_COLLECTSTATIC  set the value to 1
+```
+21. Update the requirements file with terminal command
+```
+pip freeze > requirements.txt
+```
+22. Save all files, add and commit changes and push to Github.
+23. In **Heroku** on the *deploy* tab go to 'Deployment method' click Github
+24. Connect up the correct repository for backend project
+25. In 'manual deploy section, click 'deploy branch'
+26. Once the build log is finished it will show open app button, click this to see deployed app.
 ### Fix for dj-rest-auth bug
 ### Settings for use with front end React app
 
