@@ -13,6 +13,11 @@
     2. [Frameworks, libraries, and Programs](#frameworks-libraries-and-programs)
 6. [Project Setup](#project-setup)
 7. [Deployment](#deployment)
+    1. [Setting up JSON web tokens](#setting-up-json-web-tokens)
+    2. [Prepare API for deployment to Heroku](#prepare-api-for-deployment-to-heroku)
+    3. [Deployment to Heroku](#deployment-to-heroku)
+    4. [Fix for dj-rest-auth bug](#fix-for-dj-rest-auth-bug)
+    5. [Settings for use with front end React app](#settings-for-use-with-front-end-react-app)
 8. [Credits](#credits)
 9. [Acknowledgements](#acknowledgements)
 
@@ -128,6 +133,11 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 10. Workspace is now ready to use.
 
 ## Deployment
+### Setting up JSON web tokens
+### Prepare API for deployment to Heroku
+### Deployment to Heroku
+### Fix for dj-rest-auth bug
+### Settings for use with front end React app
 
 ## Credits
 
