@@ -63,6 +63,9 @@ This repository is the backend of the application using the Django REST Framewor
     - IDE used to code project
 - Heroku
     - Used to deploy the application
+- Django Rest Auth
+- PostgreSQL
+- Cors headers
 
 
 ## Project Setup
