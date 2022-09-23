@@ -134,6 +134,102 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 ## Deployment
 ### Setting up JSON web tokens
+1. Install JSON Web Token authentication by using the terminal command
+```
+pip install dj-rest-auth
+```
+2. In **settings.py** add these 2 items to the installed apps list
+```
+'rest_framework.authtoken'
+'dj_rest_auth'
+```
+3. In the main **urls.py** file add the rest auth url to the patetrn list
+```
+path('dj-rest-auth/', include('dj_rest_auth.urls')),
+```
+4. Migrate the database using the terminal command
+```
+python manage.py migrate
+```
+5. To allow users to register install Django Allauth
+```
+pip install 'dj-rest-auth[with_social]'
+```
+6. In **settings.py** add the following to the installed app list
+```
+'django.contrib.sites',
+'allauth',
+'allauth.account',
+'allauth.socialaccount',
+'dj_rest_auth.registration',
+```
+7. also add the line in **settings.py**
+```
+SITE_ID = 1
+```
+8. In the main **urls.py** file add the registration url to patterns
+```
+ path(
+        'dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')
+    ),
+```
+9. Install the JSON tokens with the *simple jwt* library
+``` 
+pip install djangorestframework-simplejwt
+```
+10. In **env.py** set DEV to 1 to check wether in development or production
+```
+os.environ['DEV'] = '1'
+```
+11. In **settings.py** add an if/else statement to check development or production
+```
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [(
+        'rest_framework.authentication.SessionAuthentication'
+        if 'DEV' in os.environ
+        else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+    )],
+```
+12. Add the following code in **settings.py**
+```
+REST_USE_JWT = True # enables token authentication
+JWT_AUTH_SECURE = True # tokens sent over HTTPS only
+JWT_AUTH_COOKIE = 'my-app-auth' #access token
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token' #refresh token
+```
+13. Create a *serializers.py* file in the **p5_drf_api** file(my project file name)
+14. Copy the code from the Django documentation UserDetailsSerializer as follows:
+```
+from dj_rest_auth.serializers import UserDetailsSerializer
+from rest_framework import serializers
+
+
+class CurrentUserSerializer(UserDetailsSerializer):
+    """Serializer for Current User"""
+    profile_id = serializers.ReadOnlyField(source='profile.id')
+    profile_image = serializers.ReadOnlyField(source='profile.image.url')
+
+    class Meta(UserDetailsSerializer.Meta):
+        """Meta class to to specify fields"""
+        fields = UserDetailsSerializer.Meta.fields + (
+            'profile_id', 'profile_image'
+        )
+```
+15. In **settings.py** overwrite the default User Detail serializer
+```
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
+}
+```
+16. Run the migrations for database again
+```
+python manage.py migrate
+```
+17. Update the requirements file with the following terminal command
+```
+pip freeze > requirements.txt
+```
+18. Make sure to save all files, add and commit followed by pushing to Github.
 ### Prepare API for deployment to Heroku
 ### Deployment to Heroku
 ### Fix for dj-rest-auth bug
