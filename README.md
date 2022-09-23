@@ -372,9 +372,52 @@ pip freeze > requirements.txt
 22. Save all files, add and commit changes and push to Github.
 23. In **Heroku** on the *deploy* tab go to 'Deployment method' click Github
 24. Connect up the correct repository for backend project
-25. In 'manual deploy section, click 'deploy branch'
+25. In 'manual deploy' section, click 'deploy branch'
 26. Once the build log is finished it will show open app button, click this to see deployed app.
 ### Fix for dj-rest-auth bug
+- There is a bug in dj-rest-auth that doesnt allow users to log out here is the solution:
+1. In p5_drf_views import JWT_AUTH from settings.py
+```
+from .settings import (
+    JWT_AUTH_COOKIE, JWT_AUTH_REFRESH_COOKIE, JWT_AUTH_SAMESITE,
+    JWT_AUTH_SECURE,
+```
+2. Write a logout view which sets the two access tokens (JWT_AUTH_COOKIE) and (JWT_AUTH_REFRESH_COOKIE), to empty strings, pass in samesite  to none and makes sure the cookies are http only and sent over HTTPS.
+```
+@api_view(['POST'])
+def logout_route(request):
+    response = Response()
+    response.set_cookie(
+        key=JWT_AUTH_COOKIE,
+        value='',
+        httponly=True,
+        expires='Thu, 01 Jan 1970 00:00:00 GMT',
+        max_age=0,
+        samesite=JWT_AUTH_SAMESITE,
+        secure=JWT_AUTH_SECURE,
+    )
+    response.set_cookie(
+        key=JWT_AUTH_REFRESH_COOKIE,
+        value='',
+        httponly=True,
+        expires='Thu, 01 Jan 1970 00:00:00 GMT',
+        max_age=0,
+        samesite=JWT_AUTH_SAMESITE,
+        secure=JWT_AUTH_SECURE,
+    )
+    return response
+```
+3. In the main **urls.py** file import the logout route
+```
+from .views import root_route, logout_route
+```
+4. Include it in the main url patterns list(must be above the default dj-rest-auth)
+```
+path('dj-rest-auth/logout/', logout_route),
+```
+5. Save all changes, add, commit and push to Github
+6. Manually deploy the project again, by clicking *deploy branch* in the *deployment method* tab, within the *manual deploy* section.
+7. When the build log is finished click the *open app* button to see deployed site.
 ### Settings for use with front end React app
 
 ## Credits
