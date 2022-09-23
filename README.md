@@ -39,6 +39,7 @@ This repository is the backend of the application using the Django REST Framewor
 
 - Whilst testing the Todo part of the application in unit testing, I kept getting failures for the tests for the due_date and urgent fields were not null, because I wasnt testing this part at the time I changed the field values in the database models to null for both fields, then migrated the database to allow for the changes, all tests then passed.
 
+- Whilst trying to deploy the backend part of the project to Heroku, I started adding some of the steps to connect my front end project, somewhere I have gone wrong, but the front end has no functionality yet, so to fix the problem I rolled back Heroku to a version where the deployment was working. Further updates will be added if the problem persists once I have the front of the project up and running.
 ### Unfixed
 - None known
 
