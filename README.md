@@ -230,7 +230,53 @@ python manage.py migrate
 pip freeze > requirements.txt
 ```
 18. Make sure to save all files, add and commit followed by pushing to Github.
+
 ### Prepare API for deployment to Heroku
+
+1. Create a *views.py* file inside **p5_drf_api**(my project file name)
+2. Add a custom message that is shown on loading the web page
+```
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view()
+def root_route(request):
+    return Response({
+        "message": "Welcome to the Appy Families drf API!!"
+    })
+```
+3. Import to the main **urls.py** file and add to the url pattern list
+```
+from .views import root_route
+
+urlpatterns = [
+    path('', root_route),
+```
+4. In **settings.py** set up page pagination inside REST_FRAMEWORK
+```
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [(
+        'rest_framework.authentication.SessionAuthentication'
+        if 'DEV' in os.environ
+        else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+    )],
+    'DEFAULT_PAGINATION_CLASS':
+    'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
+```
+5. Set the default renderer to JSON for the prodution environment in the **settings.py** file
+```
+if 'DEV' not in os.environ:
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+```
+6. Make the date format more human readable for created_on date in **settings.py** under page size add 
+```
+'DATETIME_FORMAT': '%d %b %y',
+```
+7. Make sure to save all files, add, commit and push to Github
 ### Deployment to Heroku
 ### Fix for dj-rest-auth bug
 ### Settings for use with front end React app
