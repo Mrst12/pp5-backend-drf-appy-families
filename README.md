@@ -419,6 +419,37 @@ path('dj-rest-auth/logout/', logout_route),
 6. Manually deploy the project again, by clicking *deploy branch* in the *deployment method* tab, within the *manual deploy* section.
 7. When the build log is finished click the *open app* button to see deployed site.
 ### Settings for use with front end React app
+- When the front end React repository has been set up follow these steps to connect the back to the front:
+1. In **settings.py** add the heroku app to ALLOWED_HOSTS
+```
+ALLOWED_HOSTS = [
+    '....herokuapp.com'
+    'localhost',
+]
+```
+2. In **Heroku** deployed backend app go to *settings* and *reveal config vars*
+3. Add the new ALLOWED_HOST key with the deployed url(as added to ALLOWED_HOST)
+3. In **settings.py** replace the URL string with the new environment variable
+```
+ALLOWED_HOSTS = [
+    os.environ.get('ALLOWED_HOST'),
+    'localhost',
+]
+```
+4. Gitpod regularly changes its URL for your workspaces to make it more secure, to keep this working importh the regular expression in **settings.py**
+```
+import re
+```
+5. Update the if/else statement with
+```
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
+```
+6. Save files, add, commit and push to Github
+7. In **Heroku** manually deploy the project again.
 
 ## Credits
 
