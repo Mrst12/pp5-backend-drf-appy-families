@@ -452,5 +452,12 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 7. In **Heroku** manually deploy the project again.
 
 ## Credits
+- The code institute walkthrough DRF_API project was used for set up and guide me through this project, code is credited with modifications made to suit my project, with additional models, serializers and views being made for achievements app, and Todo app being created by myself.
+- Image for achievements default image was taken from a google search for achievement images.
 
 ## Acknowledgements
+- Code institute for a walkthrough project so I could gain my confidence and then progress on my own
+- My mentor for support and advise on the setup and prior to deployment
+- My husband and children for all their patience whilst learning and tackling this project
+- The slack community for keeping me sane and giving me the confidence to 'keep plodding'.
+- My late father who would have been proud of everything I have achieved, throughout this last year. My inspiration to keep me going. 
