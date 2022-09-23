@@ -91,9 +91,19 @@ off on a table, There were 3 errors, one was found from the validator, which was
 ![Error found in pep8 validator](./assets/documents/error-pep8-url.png)
 
 ## Manual Testing
+- Manual Tests were carried out for the Url paths, search and filter functionality, and CRUD functionality, all were made into tables and checked off.
 
 ### URL Path tests
+![URL path tests table](./assets/documents/p5-testing-paths.png)
 
 ### Search and Filter testing
+![Search and Filter testing](./assets/documents/p5-search-filters-testing-table.png)
 
 ### CRUD Testing
+- Table was made to check a user could **C**reate, **R**ead, **U**pdate, or **D**elete items.
+- I used a key in the table 
+    - LI meaning the user was logged in, and so could Create, and read.
+    - LO meaning the user was not logged in and so could only read.
+    - LI/O meaning the user was logged in **and** the owner so had full CRUD functionality.
+
+![CRUD table of testing](./assets/documents/p5-crud-testing-table.png)
