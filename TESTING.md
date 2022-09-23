@@ -27,6 +27,16 @@ achievements, and a logged out user cannot create an achievement.
 
 
 ### Achievements Detail View
+- Tests to check that a valid id will retrieve an achievement post, an invalid id will not retrieve an
+achievement post, check wether a user can update their own post, and a post cannot be updated by someone
+who doesn't own it.
+
+![Testing achievements detail view](./assets/documents/tests-achievement-detail.png)
+
+- All tests passed
+
+![Results for achievements detail view](./assets/documents/results-achievements-detail-view.png)
+
 
 ### Memo_posts List View
 
