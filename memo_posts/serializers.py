@@ -12,6 +12,8 @@ class MemoSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     like_id = serializers.SerializerMethodField()
+    comments_count = serializers.ReadOnlyField()
+    likes_count = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         '''check user is owner'''
@@ -33,5 +35,6 @@ class MemoSerializer(serializers.ModelSerializer):
         model = Memo
         fields = [
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
-            'created_on', 'content', 'like_id', 'For',
+            'created_on', 'content', 'like_id', 'For', 'comments_count',
+            'likes_count',
         ]

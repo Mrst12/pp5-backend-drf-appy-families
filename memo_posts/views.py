@@ -1,4 +1,5 @@
 ''' views file for memo posts '''
+from django.db.models import Count
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from p5_drf_api.permissions import IsOwnerOrReadOnly
@@ -13,8 +14,12 @@ class MemoList(generics.ListCreateAPIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
-    queryset = Memo.objects.all()
+    queryset = Memo.objects.annotate(
+        comments_count=Count('memocomment', distinct=True),
+        likes_count=Count('like_memo', distinct=True)
+    ).order_by('-created_on')
     filter_backends = [
+        filters.OrderingFilter,
         filters.SearchFilter,
         DjangoFilterBackend,
     ]
@@ -27,6 +32,10 @@ class MemoList(generics.ListCreateAPIView):
         'content',
         'For',
     ]
+    ordering_fields = [
+        'comments_count',
+        'likes_count',
+    ]
 
     def perform_create(self, serializer):
         '''make sure user associated with memo post'''
@@ -38,4 +47,7 @@ class MemoDetail(generics.RetrieveUpdateDestroyAPIView):
     ''' Retrieve, update or delete if owner  '''
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = MemoSerializer
-    queryset = Memo.objects.all()
+    queryset = Memo.objects.annotate(
+        comments_count=Count('memocomment', distinct=True),
+        likes_count=Count('like_memo', distinct=True)
+    ).order_by('-created_on')

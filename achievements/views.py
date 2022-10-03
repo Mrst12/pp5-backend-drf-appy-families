@@ -43,4 +43,7 @@ class AchievementDetail(generics.RetrieveUpdateDestroyAPIView):
     '''retrieve, edit,or delete if owned by user'''
     serializer_class = AchievementSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Achievements.objects.all()
+    queryset = Achievements.objects.annotate(
+        comments_count=Count('achievementscomment', distinct=True),
+        likes_count=Count('like_achievements', distinct=True)
+    ).order_by('-date_created')
