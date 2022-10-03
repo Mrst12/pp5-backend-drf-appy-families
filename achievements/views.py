@@ -1,4 +1,5 @@
 '''views file for achievements app'''
+from django.db.models import Count
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from p5_drf_api.permissions import IsOwnerOrReadOnly
@@ -10,8 +11,12 @@ class AchievementList(generics.ListCreateAPIView):
     '''list achievements and create achievement if logged in'''
     serializer_class = AchievementSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    queryset = Achievements.objects.all()
+    queryset = Achievements.objects.annotate(
+        comments_count=Count('achievementscomment', distinct=True),
+        likes_count=Count('like_achievements', distinct=True)
+    ).order_by('-date_created')
     filter_backends = [
+        filters.OrderingFilter,
         filters.SearchFilter,
         DjangoFilterBackend,
     ]
@@ -23,6 +28,10 @@ class AchievementList(generics.ListCreateAPIView):
         'owner__username',
         'content',
         'title',
+    ]
+    ordering_fields = [
+        'comments_count',
+        'likes_count',
     ]
 
     def perform_create(self, serializer):

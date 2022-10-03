@@ -11,6 +11,8 @@ class AchievementSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     like_id = serializers.SerializerMethodField()
+    comments_count = serializers.ReadOnlyField()
+    likes_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         '''make sure uploaded image does not exceed size'''
@@ -49,5 +51,5 @@ class AchievementSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'date_created', 'title', 'content',
             'image', 'is_owner', 'profile_id', 'profile_image',
-            'like_id',
+            'like_id', 'comments_count', 'likes_count',
         ]
