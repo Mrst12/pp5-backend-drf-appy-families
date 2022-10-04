@@ -51,5 +51,5 @@ class AchievementSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'date_created', 'title', 'content',
             'image', 'is_owner', 'profile_id', 'profile_image',
-            'like_id', 'achievement_comments_count', 'achievement_likes_count',
+            'like_id', 'achievements_comments_count', 'achievements_likes_count',
         ]
