@@ -1,4 +1,4 @@
-'''serailizers for achievements app'''
+'''serializers for achievements app'''
 from rest_framework import serializers
 from like_achievements.models import AchievementLikes
 from achievements.models import Achievements
