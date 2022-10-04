@@ -40,7 +40,7 @@ class AchievementSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if user.is_authenticated:
             like = AchievementLikes.objects.filter(
-                owner=user, achievements_post=obj
+                owner=user, achievement_post=obj
             ).first()
             return like.id if like else None
         return None
