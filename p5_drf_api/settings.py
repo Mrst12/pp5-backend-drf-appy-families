@@ -114,6 +114,7 @@ INSTALLED_APPS = [
     'comments_achievements',
     'like_achievements',
     'to_do',
+    'followers',
 ]
 SITE_ID = 1
 MIDDLEWARE = [
