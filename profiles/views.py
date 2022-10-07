@@ -11,7 +11,7 @@ from .serializers import ProfileSerializer
 class ProfileList(generics.ListAPIView):
     '''profile list '''
     queryset = Profile.objects.annotate(
-        memo_posts_count=Count('owner__memo_posts', distinct=True),
+        memo_posts_count=Count('owner__memo', distinct=True),
         achievements_posts_count=Count('owner__achievements', distinct=True),
         followers_count=Count('owner__followed', distinct=True),
         following_count=Count('owner__following', distinct=True),
@@ -40,7 +40,7 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(
-        memo_posts_count=Count('owner__memo_posts', distinct=True),
+        memo_posts_count=Count('owner__memo', distinct=True),
         achievements_posts_count=Count('owner__achievements', distinct=True),
         followers_count=Count('owner__followed', distinct=True),
         following_count=Count('owner__following', distinct=True),
