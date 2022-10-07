@@ -23,6 +23,7 @@ class AchievementList(generics.ListCreateAPIView):
     filterset_fields = [
         'like_achievements__owner__profile',
         'owner__profile',
+        'owner__followed__owner__profile',
     ]
     search_fields = [
         'owner__username',
