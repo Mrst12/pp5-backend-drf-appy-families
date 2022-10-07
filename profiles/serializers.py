@@ -1,7 +1,7 @@
 ''' serializers for profile app '''
 from rest_framework import serializers
-from .models import Profile
 from followers.models import Follower
+from .models import Profile
 
 
 # class taken from DRF-APi walkthrough with modifications
@@ -10,12 +10,15 @@ class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()
+    memo_posts_count = serializers.ReadOnlyField()
+    achievements_posts_count = serializers.ReadOnlyField()
+    followers_count = serializers.ReadOnlyField()
+    following_count = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         ''' check user is owner '''
         request = self.context['request']
         return request.user == obj.owner
-
 
     def get_following_id(self, obj):
         '''return following count'''
@@ -32,5 +35,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = [
             'id', 'owner', 'created_on', 'name', 'bio',
-            'image', 'is_owner', 'following_id'
+            'image', 'is_owner', 'following_id',
+            'memo_posts_count', 'achievements_posts_count',
+            'followers_count', 'following_count',
         ]
