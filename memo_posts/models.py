@@ -8,7 +8,7 @@ class Memo(models.Model):
     ''' memo posts model '''
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
-    For = models.CharField(max_length=100)
+    attention_of = models.CharField(max_length=100)
     content = models.TextField(blank=True)
 
     class Meta:
@@ -17,4 +17,4 @@ class Memo(models.Model):
 
         def __str__(self):
             ''' shows what to display '''
-            return f'{self.id} {self.For}'
+            return f'{self.id} {self.attention_of}'
