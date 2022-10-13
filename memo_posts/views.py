@@ -31,7 +31,7 @@ class MemoList(generics.ListCreateAPIView):
     search_fields = [
         'owner__username',
         'content',
-        'For',
+        'attention_of',
     ]
     ordering_fields = [
         'comments_count',
