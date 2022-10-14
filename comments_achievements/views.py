@@ -1,5 +1,6 @@
 '''views file for comments for achievements page'''
 from rest_framework import generics, permissions
+from django_filters.rest_framework import DjangoFilterBackend
 from p5_drf_api.permissions import IsOwnerOrReadOnly
 from .models import AchievementsComment
 from .serializers import (
@@ -12,6 +13,8 @@ class AchievementsCommentList(generics.ListCreateAPIView):
     serializer_class = AchievementsCommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = AchievementsComment.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['achievement_post']
 
     def perform_create(self, serializer):
         '''make sure comments associated with user'''
