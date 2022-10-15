@@ -21,4 +21,5 @@ class TodoSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
             'created_on', 'task_title', 'due_date', 'urgent', 'status',
+            'content',
         ]
