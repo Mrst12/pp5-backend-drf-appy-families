@@ -9,7 +9,7 @@ class Memo(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     attention_of = models.CharField(max_length=100)
-    content = models.TextField(blank=True)
+    content = models.TextField()
 
     class Meta:
         '''order by created on field'''
