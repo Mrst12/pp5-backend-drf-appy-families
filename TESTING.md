@@ -96,6 +96,7 @@ off on a table, There were 3 errors, one was found from the validator, which was
 
 ### URL Path tests
 ![URL path tests table](./assets/documents/p5-testing-paths.png)
+![URL path tests for deployed api](./assets/documents/api-url-deployed-check.png)
 
 ### Search and Filter testing
 ![Search and Filter testing](./assets/documents/p5-search-filters-testing-table.png)
