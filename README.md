@@ -53,6 +53,11 @@ This repository is the backend of the application using the Django REST Framewor
 - Whilst testing the Todo part of the application in unit testing, I kept getting failures for the tests for the due_date and urgent fields were not null, because I wasnt testing this part at the time I changed the field values in the database models to null for both fields, then migrated the database to allow for the changes, all tests then passed.
 
 - Whilst trying to deploy the backend part of the project to Heroku, I started adding some of the steps to connect my front end project, somewhere I have gone wrong, but the front end has no functionality yet, so to fix the problem I rolled back Heroku to a version where the deployment was working. Further updates will be added if the problem persists once I have the front of the project up and running.
+Update to this problem it was a fault on the config vars in heroku, I had unitentionally added //https at the beginning it was taken off and everything worked as intended.
+
+- Whilst working on the profile url's when clicking on the profile avatar, it wouldnt render the information for the user, after contacting tutor support, *Sean* helped work out that I had missed the / of the end of the details url in profiles, once rectified the profiles were rendered as expected.
+
+- After setting up comments for achievements and memo's  the comments that has been posted were showing up on every post even if no comments had been posted on a specific post, tutor support were unable to shed any light on the problem, I eventually found I had not added the queryset on setup of the project, once added the issue was resolved.
 ### Unfixed
 - None known
 
