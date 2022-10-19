@@ -470,6 +470,7 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 
 ## Acknowledgements
 - Code institute for a walkthrough project so I could gain my confidence and then progress on my own
+- Sean and Ed from tutor support for helping me resolve issues that I couldnt figure out.
 - My mentor for support and advise on the setup and prior to deployment
 - My husband and children for all their patience whilst learning and tackling this project
 - The slack community for keeping me sane and giving me the confidence to 'keep plodding'.
