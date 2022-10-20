@@ -37,7 +37,9 @@ This repository is the backend of the application using the Django REST Framewor
 
 ## Database Schema
 
-[database schema for project](./assets/documents/erd-p5.png)
+[database schema for project](./assets/documents/erd-p5.png).
+
+- The database schema changed during production, I implemented a following feature so family members could watch each other, I took out the urgent and status fields from the todo application, the urgent because when the single post was shown it looked unnecessary, the status because of time constraints and the scope of my knowledge at this time.
 
 ## Testing
 
