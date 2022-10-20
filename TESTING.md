@@ -103,6 +103,7 @@ off on a table, There were 3 errors, one was found from the validator, which was
 
 ### CRUD Testing
 - Table was made to check a user could **C**reate, **R**ead, **U**pdate, or **D**elete items.
+- The table for deployed was testing in the front link to the front end [here](https://github.com/Mrst12/pp5-frontend-react-appy-families/blob/main/TESTING.md)
 - I used a key in the table 
     - LI meaning the user was logged in, and so could Create, and read.
     - LO meaning the user was not logged in and so could only read.
