@@ -16,7 +16,6 @@ class TodoList(generics.ListCreateAPIView):
     search_fields = [
         'owner__username',
         'task_title',
-        'status',
         'due_date',
     ]
 
