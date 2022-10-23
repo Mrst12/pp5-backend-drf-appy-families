@@ -12,8 +12,10 @@ class AchievementList(generics.ListCreateAPIView):
     serializer_class = AchievementSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Achievements.objects.annotate(
-        achievements_comments_count=Count('achievementscomment', distinct=True),
-        achievements_likes_count=Count('like_achievements', distinct=True)
+        achievements_comments_count=Count(
+            'achievementscomment', distinct=True
+        ),
+        achievements_likes_count=Count('like_achievements', distinct=True),
     ).order_by('-date_created')
     filter_backends = [
         filters.OrderingFilter,
@@ -45,6 +47,8 @@ class AchievementDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AchievementSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Achievements.objects.annotate(
-        achievements_comments_count=Count('achievementscomment', distinct=True),
-        achievements_likes_count=Count('like_achievements', distinct=True)
+        achievements_comments_count=Count(
+            'achievementscomment', distinct=True
+        ),
+        achievements_likes_count=Count('like_achievements', distinct=True),
     ).order_by('-date_created')
